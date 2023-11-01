@@ -4,27 +4,37 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const iniciarBtn = document.querySelector(".iniciar");
   const pararBtn = document.querySelector(".parar");
+  const imagemIniciar = document.querySelector(".iniciar img");
+  const originalSvg =
+    '<svg fill="rgb(65, 65, 228)" viewBox="0 0 16 16" class="comecar"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"></path></svg>';
 
   let timer;
   let totalSegundos = 600;
   let segundos = totalSegundos;
+  let isRunning = false;
 
   atualizarDisplay();
 
   iniciarBtn.addEventListener("click", function () {
     if (!timer) {
+      iniciarBtn.innerHTML =
+        '<img class="pausar" src="assets/pause-fill.svg" alt="Pausar">';
       timer = setInterval(atualizarTimer, 1000);
     } else {
+      iniciarBtn.innerHTML = originalSvg;
       clearInterval(timer);
       timer = null;
     }
+    isRunning = !isRunning;
   });
 
   pararBtn.addEventListener("click", function () {
+    iniciarBtn.innerHTML = originalSvg;
     clearInterval(timer);
     timer = null;
-    segundos = 0;
+    segundos = totalSegundos;
     atualizarDisplay();
+    isRunning = false;
   });
 
   function atualizarTimer() {
@@ -36,6 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
       timer = null;
       segundos = totalSegundos;
       atualizarDisplay();
+      isRunning = false;
     }
   }
 
