@@ -19,6 +19,10 @@ document.addEventListener("DOMContentLoaded", function () {
     if (!timer) {
       iniciarBtn.innerHTML =
         '<img class="pausar" src="assets/pause-fill.svg" alt="Pausar">';
+      if (!isRunning) {
+        totalSegundos = 600;
+        segundos = totalSegundos;
+      }
       timer = setInterval(atualizarTimer, 1000);
     } else {
       iniciarBtn.innerHTML = originalSvg;
@@ -32,6 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     iniciarBtn.innerHTML = originalSvg;
     clearInterval(timer);
     timer = null;
+    totalSegundos = 0;
     segundos = totalSegundos;
     atualizarDisplay();
     isRunning = false;
